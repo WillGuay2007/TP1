@@ -19,7 +19,9 @@ int main(int argc, char** argv) {
 	heap = (uint8_t*)malloc(HEAP_SIZE);
 	assert(heap != NULL);
 
-    printf("Bienvenue dans mon application nommer monprojet !\n");
-    printf("20 plus 22 donne: %d\n", monprojet_add(20,22));
-    monprojet_ditbonjour();
+	//Commencer à écrire le code ici:
+
+
+
+
 }
