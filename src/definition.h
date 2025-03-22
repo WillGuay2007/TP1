@@ -10,6 +10,8 @@ typedef struct Item{
     int valeur;
 } Item;
 
+typedef struct Node Node;
+
 typedef struct Node {
     Item Item;
     Node* Next;
@@ -29,7 +31,7 @@ void* allocate(size_t size);
 void monprojet_ajouter_item(Inventory* inv, Item item);
 void monprojet_enlever_item(Inventory* inv, char* nom);
 void monprojet_trier_inventaire(void);
-int monprojet_get_quantite(void);
+int monprojet_get_quantite(Inventory* inv);
 Item* monprojet_trouver_item_par_nom(Inventory* inv, char* nom);
 Item* monprojet_trouver_item_par_position(Inventory* inv, int position);
 Inventory* monprojet_CreerInventory(Item firstItem);

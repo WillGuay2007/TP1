@@ -21,7 +21,5 @@ int main(int argc, char** argv) {
 
 	//Commencer à écrire le code ici:
 
-
-
-
+     
 }
