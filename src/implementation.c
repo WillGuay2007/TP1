@@ -68,6 +68,7 @@ void monprojet_trier_inventaire(Inventory* inv) {
 		}
 		LastNode = CurrentNode;
 	}
+	printf("L'inventaire a ete trie.\n");
 }
 int monprojet_get_quantite(Inventory* inv) {
 	if (inv->Head == NULL) return 0;
