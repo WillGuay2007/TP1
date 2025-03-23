@@ -30,8 +30,10 @@ void* allocate(size_t size);
 
 void monprojet_ajouter_item(Inventory* inv, Item item);
 void monprojet_enlever_item(Inventory* inv, char* nom);
-void monprojet_trier_inventaire(void);
+void monprojet_trier_inventaire(Inventory* inv);
 int monprojet_get_quantite(Inventory* inv);
 Item* monprojet_trouver_item_par_nom(Inventory* inv, char* nom);
 Item* monprojet_trouver_item_par_position(Inventory* inv, int position);
+void monprojet_printinventory(Inventory* inv);
+//void monprojet_populate(FILE* file, Item* Items);
 Inventory* monprojet_CreerInventory(Item firstItem);

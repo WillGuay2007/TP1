@@ -2,6 +2,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 // Il est important de faire l'implementation de vos fonctions dans un fichier .c
 // Si vous le faites dans le fichier "header", chaque fichier qui l'include va compiler l`implementation
@@ -44,8 +45,29 @@ void monprojet_enlever_item(Inventory* inv, char* nom) {
 	//free(SlotToRemove);
 
 }
-void monprojet_trier_inventaire(void) {
+void monprojet_trier_inventaire(Inventory* inv) {
+	if (inv->Head == NULL) return;
 
+	int Swapped = 1;
+	Node* CurrentNode;
+	Node* LastNode = NULL;
+
+	while (Swapped == 1) {
+		Swapped = 0;
+		CurrentNode = inv->Head;
+
+		while (CurrentNode->Next != LastNode) {
+			if (CurrentNode->Item.valeur > CurrentNode->Next->Item.valeur) {
+				Item tempItem = CurrentNode->Item;
+				CurrentNode->Item = CurrentNode->Next->Item;
+				CurrentNode->Next->Item = tempItem;
+
+				Swapped = 1;
+			}
+			CurrentNode = CurrentNode->Next;
+		}
+		LastNode = CurrentNode;
+	}
 }
 int monprojet_get_quantite(Inventory* inv) {
 	if (inv->Head == NULL) return 0;
@@ -88,15 +110,45 @@ Item* monprojet_trouver_item_par_position(Inventory* inv, int position) {
 	return NULL;
 }
 
-void PrintInventory(Inventory* inv) {
+void monprojet_printinventory(Inventory* inv) {
 	if (inv->Head != NULL) {
 		Node* CurrentNode = inv->Head;
 		int CurrentPos = 0;
+
+		printf("\033[1;33m\n\nINVENTAIRE\n\n\033[0m\n");
+
 		while (CurrentNode != NULL) {
 			printf("Position de l'item: %d\nNom de l'item: %s\nValeur de l'item: %d\n\n--------------------\n\n", CurrentPos, CurrentNode->Item.nom, CurrentNode->Item.valeur);
 			CurrentNode = CurrentNode->Next;
 			CurrentPos++;
 		}
+	}
+}
+
+void monprojet_populate(FILE* file, Item* Items) {
+	char Buffer[256];
+	int count = 0;
+
+	while (fgets(Buffer, 256, file) != NULL) {
+		char* word = strtok(Buffer, " \n");
+
+		while (word != NULL) {
+			if (strcmp(word, "Name,") == 0) {
+				word = strtok(NULL, " \n");
+				if (word != NULL) {
+					word[strcspn(word, ",")] = '\0';
+					Items[count].nom = strdup(word);
+				}
+			}
+			else if (strcmp(word, "Value,") == 0) {
+				word = strtok(NULL, " \n");
+				if (word != NULL) {
+					Items[count].valeur = atoi(word);
+				}
+			}
+			word = strtok(NULL, " \n");
+		}
+		count++;
 	}
 }
 
