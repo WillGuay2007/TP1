@@ -19,7 +19,7 @@ void monprojet_ajouter_item(Inventory* inv, Item item){
 	NewSlot->Next = NULL;
 
 	CurrentSlot->Next = NewSlot;
-	printf("Ajoute: %s dans l'inventaire.", item.nom);
+	printf("Ajoute: %s dans l'inventaire.\n", item.nom);
 };
 void monprojet_enlever_item(Inventory* inv, char* nom) {
 	Node* SlotToRemove = monprojet_trouver_item_par_nom(inv, nom);
@@ -36,7 +36,7 @@ void monprojet_enlever_item(Inventory* inv, char* nom) {
 		CurrentSlot->Next = SlotToRemove->Next;
 	}
 	
-	printf("Item: %s a ete enleve de l'inventaire.", SlotToRemove->Item.nom);
+	printf("Item: %s a ete enleve de l'inventaire.\n", SlotToRemove->Item.nom);
 
 	SlotToRemove->Next = NULL;
 	SlotToRemove->Item.nom = NULL;
