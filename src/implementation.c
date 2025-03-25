@@ -42,7 +42,7 @@ void monprojet_enlever_item(Inventory* inv, char* nom) {
 	SlotToRemove->Item.nom = NULL;
 	SlotToRemove->Item.valeur = 0;
 
-	//free(SlotToRemove);
+	memset(SlotToRemove, 0, sizeof(Node));
 
 }
 void monprojet_trier_inventaire(Inventory* inv) {
@@ -110,7 +110,6 @@ Item* monprojet_trouver_item_par_position(Inventory* inv, int position) {
 	printf("Position invalide.\n");
 	return NULL;
 }
-
 void monprojet_printinventory(Inventory* inv) {
 	if (inv->Head != NULL) {
 		Node* CurrentNode = inv->Head;
@@ -125,7 +124,6 @@ void monprojet_printinventory(Inventory* inv) {
 		}
 	}
 }
-
 void monprojet_populate(FILE* file, Item* Items) {
 	char Buffer[256];
 	int count = 0;
@@ -152,11 +150,11 @@ void monprojet_populate(FILE* file, Item* Items) {
 		count++;
 	}
 }
-
 Inventory* monprojet_CreerInventory(Item firstItem) {
 	Inventory* inv = (Inventory*)allocate(sizeof(Inventory));
 	inv->Head = (Node*)allocate(sizeof(Node));
 	inv->Head->Item = firstItem;
 	inv->Head->Next = NULL;
+	printf("Nouvel inventaire initialise avec item: %s\n", firstItem.nom);
 	return inv;
 }

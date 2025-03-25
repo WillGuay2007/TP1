@@ -2,7 +2,7 @@
 // Il garantit que le fichier "header" n'est inclus qu'une seule fois par compilation,
 // ce qui evite les erreurs de redefinition et les conflits de symboles.
 #pragma once
-
+#include <stdio.h>
 #include <stdint.h>
 
 typedef struct Item{
@@ -35,5 +35,5 @@ int monprojet_get_quantite(Inventory* inv);
 Item* monprojet_trouver_item_par_nom(Inventory* inv, char* nom);
 Item* monprojet_trouver_item_par_position(Inventory* inv, int position);
 void monprojet_printinventory(Inventory* inv);
-//void monprojet_populate(FILE* file, Item* Items);
+void monprojet_populate(FILE* file, Item* Items);
 Inventory* monprojet_CreerInventory(Item firstItem);
